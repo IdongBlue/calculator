@@ -119,3 +119,56 @@ equal.addEventListener('click', () => {
     }
 })
 
+document.addEventListener('keydown', (e) => {
+    if (e.key == "+" || e.key == "-") {
+        if (screen.innerHTML != "" && operatorClick == 0) {
+            operate();
+            screen.innerHTML = screen.innerHTML + e.key;
+            operatorClick = 1;
+        } else {
+        screen.innerHTML = operation.innerHTML + e.key;
+        operatorClick = 1;
+        } 
+    } else if (e.key == "*") {
+        if (screen.innerHTML != "" && operatorClick == 0) {
+            operate();
+            screen.innerHTML = screen.innerHTML + "×";
+            operatorClick = 1;
+        } else {
+        screen.innerHTML = operation.innerHTML + "×";
+        operatorClick = 1;
+        }
+    } else if (e.key == "/") {
+        if (screen.innerHTML != "" && operatorClick == 0) {
+            operate();
+            screen.innerHTML = screen.innerHTML + "÷";
+            operatorClick = 1;
+        } else {
+        screen.innerHTML = operation.innerHTML + "÷";
+        operatorClick = 1;
+        }
+    } else if (isNaN(e.key) === false) {
+        if (operation.innerHTML == 0 || operatorClick == 1) {
+            operation.innerHTML = e.key;
+            operatorClick = 0;
+        } else {
+            operation.innerHTML = operation.innerHTML + e.key;
+        }
+    } else if (e.key == "=" || e.key == "Enter") {
+        let split = screen.innerHTML.split("");
+        if (split.includes("=") === false && operatorClick == 0) {
+        operate();
+    }
+    } else if (e.key == "Backspace") {
+        let split = operation.innerHTML.split("");
+        split.pop();
+        split = split.join("");
+        operation.innerHTML =split;
+}   else if (e.key == ".") {
+    let split = operation.innerHTML.split("");
+    if (!split.includes(".")) {
+       operation.innerHTML = operation.innerHTML + "."; 
+    }
+}
+});
+
